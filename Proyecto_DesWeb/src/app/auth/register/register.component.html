@@ -1,0 +1,47 @@
+<div class="registro-container">
+  <h1>Registro</h1>
+  <form (ngSubmit)="onRegister()" #registroForm="ngForm">
+    <label for="nombre">Nombre de usuario:</label>
+    <input type="text" id="nombre" name="nombre" required [(ngModel)]="registerData.nombre">
+
+    <label for="correo">Correo electrónico:</label>
+    <input
+      type="email"
+      id="correo"
+      name="correo"
+      required
+      [(ngModel)]="registerData.correo"
+      (ngModelChange)="checkEmailDomain()"
+    >
+    <!-- Mensaje de error específico para dominios no permitidos -->
+    <div *ngIf="emailDomainInvalid" class="mensaje-error" style="color: red; margin-bottom: 8px;">
+      ⚠️ Solo se permiten correos con los dominios: {{ allowedDomains.join(', ') }}
+    </div>
+
+    <label for="contraseña">Contraseña:</label>
+    <input type="password" id="contraseña" name="contraseña" required [(ngModel)]="registerData.contrasena">
+
+    <label for="confirmPassword">Confirme su contraseña:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required [(ngModel)]="registerData.confirmPassword">
+
+    <!-- NUEVO CAMPO: Selección de tipo -->
+    <label for="tipo">Tipo de usuario:</label>
+    <select id="tipo" name="tipo" required [(ngModel)]="registerData.tipo">
+      <option value="usuario">Usuario</option>
+      <option value="admin">Administrador</option>
+    </select>
+
+    <!-- Botón para enviar -->
+    <button type="submit">Registrarse</button>
+
+    <!-- Mensaje de error general -->
+    <p *ngIf="mensajeError" class="mensaje-error">
+      ⚠️ {{ mensajeError }}
+    </p>
+
+    <!-- Mensaje de éxito -->
+    <p *ngIf="mensajeExito" class="mensaje-exito">
+      ✅ {{ mensajeExito }}
+    </p>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket de Viaje</title>
+</head>
+<body>
+<!-- Mostrar el boleto si hay datos -->
+<div class="ticket-container" *ngIf="boletoReciente; else errorTemplate">
+  <div class="ticket-header">
+    <span>Expressie</span>
+    <span class="status approved">{{ boletoReciente.estado | titlecase }}</span>
+  </div>
+
+  <div class="ticket-details">
+    <p><strong>Fecha:</strong> {{ boletoReciente.fecha }}</p>
+    <p><strong>Hora de emisión:</strong> {{ boletoReciente.horaEmision | date:'short' }}</p>
+    <p><strong>No. de transacción:</strong> {{ boletoReciente.id }}</p>
+    <p><strong>Ciudad de salida:</strong> {{ boletoReciente.origen }}</p>
+    <p><strong>Destino:</strong> {{ boletoReciente.destino }}</p>
+  </div>
+
+  <div class="ticket-seating">
+    <p><strong>Asiento:</strong> {{ boletoReciente.asiento }} ({{ boletoReciente.categoriaAsiento | titlecase }})</p>
+    <p><strong>Pasajeros:</strong> {{ boletoReciente.numeroPasajeros }}</p>
+  </div>
+
+  <div class="ticket-payment">
+    <p><strong>Tarifa:</strong> {{ boletoReciente.precio | currency }}</p>
+    <p><strong>Método de pago:</strong> {{ boletoReciente.metodoPago | titlecase }}</p>
+  </div>
+
+  <div class="ticket-trip-details">
+    <p><strong>Detalles del viaje:</strong></p>
+    <ul>
+      <li *ngFor="let parada of boletoReciente.detallesViaje">{{ parada }}</li>
+    </ul>
+  </div>
+
+  <div class="ticket-footer">
+    <p class="savings">Total Pagado: {{ boletoReciente.precio | currency }}</p>
+  </div>
+</div>
+
+<!-- Mostrar mensaje de error si no hay boleto -->
+<ng-template #errorTemplate>
+  <p *ngIf="mensajeError" class="error-message">{{ mensajeError || 'No se ha encontrado información del boleto' }}</p>
+</ng-template>
+
+    
+
+    <!-- Botón de historial -->
+    <a routerLink="/home" class="history-btn" aria-label="Volver al inicio">
+        Volver al inicio
+    </a>
+</body>
+</html>

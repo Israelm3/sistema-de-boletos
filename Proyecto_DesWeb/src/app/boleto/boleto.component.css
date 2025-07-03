@@ -1,0 +1,254 @@
+body {
+    background-color: #1a1a1a; /* Mantener el fondo oscuro general */
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Estilos para el contenedor principal del boleto */
+.ticket-container {
+    background-color: #2e2e2e; /* Fondo del boleto: un gris más claro, similar al de la página principal */
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Header del boleto (manteniendo el rojo vibrante, ya que contrasta bien) */
+.ticket-header {
+    background-color: #ff4d4d; /* Rojo vibrante como en Boardingpass */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.ticket-header span {
+    white-space: nowrap;
+}
+
+.ticket-header .status {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 0.75em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket-header .status.approved {
+    background-color: #4CAF50; /* Verde para 'Aprobado' (puedes usar el verde de EXPRESSIE aquí también si quieres) */
+}
+
+/* Detalles generales del boleto */
+.ticket-details,
+.ticket-seating,
+.ticket-payment,
+.ticket-trip-details {
+    padding: 15px 20px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2); /* Línea punteada sutil y visible */
+}
+
+.ticket-details:last-of-type,
+.ticket-seating:last-of-type,
+.ticket-payment:last-of-type {
+    border-bottom: none;
+}
+
+.ticket-details p,
+.ticket-seating p,
+.ticket-payment p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.ticket-details strong,
+.ticket-seating strong,
+.ticket-payment strong {
+    color: #b3b3b3; /* Mantener un color ligeramente más claro para las etiquetas */
+    min-width: 140px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.ticket-details p span:last-child,
+.ticket-seating p span:last-child,
+.ticket-payment p span:last-child {
+    text-align: right;
+    flex-grow: 1;
+}
+
+.ticket-trip-details ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.ticket-trip-details li {
+    margin-bottom: 5px;
+    color: #e0e0e0;
+}
+
+/* Footer del boleto (para Total Pagado) */
+.ticket-footer {
+    padding: 15px 20px;
+    text-align: right;
+    font-weight: bold;
+    color: #ff4d4d; /* Mantener el rojo vibrante para el total */
+    font-size: 1.1em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.ticket-footer .savings {
+    margin: 0;
+}
+
+/* Perforaciones en el boleto */
+.ticket-container::before,
+.ticket-container::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #1a1a1a; /* Color del fondo de la página para simular el agujero */
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.ticket-container::before {
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ticket-container::after {
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Nueva sección para el área de código de barras */
+.barcode-area {
+    padding: 20px;
+    text-align: center;
+    background-color: #2e2e2e; /* Mismo color que el cuerpo del boleto */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.barcode-area .barcode-img {
+    display: block;
+    width: 80%;
+    max-width: 250px;
+    height: 60px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="0" y="0" width="5" height="100" fill="black"/><rect x="10" y="0" width="2" height="100" fill="black"/><rect x="15" y="0" width="8" height="100" fill="black"/><rect x="25" y="0" width="3" height="100" fill="black"/><rect x="30" y="0" width="6" height="100" fill="black"/><rect x="40" y="0" width="2" height="100" fill="black"/><rect x="45" y="0" width="10" height="100" fill="black"/><rect x="60" y="0" width="3" height="100" fill="black"/><rect x="65" y="0" width="7" height="100" fill="black"/><rect x="75" y="0" width="2" height="100" fill="black"/><rect x="80" y="0" width="5" height="100" fill="black"/><rect x="90" y="0" width="10" height="100" fill="black"/></svg>') repeat-x center center;
+    background-size: contain;
+    margin: 0 auto 10px auto;
+}
+
+.barcode-area .barcode-text {
+    color: #b3b3b3;
+    font-size: 0.8em;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #ff4d4d;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+/* Botón "Volver al inicio" */
+.history-btn {
+    background-color: #ff4d4d; /* Rojo vibrante */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.history-btn:hover {
+    background-color: #e63939;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .ticket-container {
+        border-radius: 10px;
+    }
+
+    .ticket-header {
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    .ticket-header .status {
+        padding: 2px 6px;
+        font-size: 0.7em;
+    }
+
+    .ticket-details,
+    .ticket-seating,
+    .ticket-payment,
+    .ticket-trip-details {
+        padding: 10px 15px;
+    }
+
+    .ticket-details p,
+    .ticket-seating p,
+    .ticket-payment p {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ticket-details strong,
+    .ticket-seating strong,
+    .ticket-payment strong {
+        margin-bottom: 3px;
+        min-width: unset;
+        margin-right: 0;
+    }
+
+    .ticket-details p span:last-child,
+    .ticket-seating p span:last-child,
+    .ticket-payment p span:last-child {
+        text-align: left;
+    }
+
+    .barcode-area {
+        padding: 15px;
+    }
+}

@@ -1,0 +1,144 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradiente morado a azul */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.2); /* Fondo translúcido */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde translúcido */
+    border-radius: 15px; /* Esquinas redondeadas */
+    padding: 20px 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidad con WebKit */
+    animation: slideIn 1s ease-out;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Sombra en el texto */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Borde claro */
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2); /* Fondo translúcido */
+    color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
+    backdrop-filter: blur(5px); /* Vidrio esmerilado inputs */
+    -webkit-backdrop-filter: blur(5px);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Placeholder translúcido */
+}
+
+/* Contenedor del enlace de registro */
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.register-link p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+}
+
+.register-link a {
+    font-size: 18px;
+    font-weight: bold;
+    color: magenta;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.register-link a:hover {
+    color: darkmagenta;
+    text-decoration: underline;
+    transform: scale(1.1);
+}
+
+button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Animación para el formulario */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* === Estilos para el mensaje de bienvenida o error === */
+.mensaje-login {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    /* Por defecto azul oscuro */
+    color: #2c3e50;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    user-select: none;
+    /* Transición para suavizar cambio de color */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Mensaje de bienvenida (positivo) */
+.mensaje-login.bienvenida {
+    color: #1e4620; /* Verde oscuro */
+    background-color: rgba(144, 238, 144, 0.8); /* Verde claro translúcido */
+}
+
+/* Mensaje de error */
+.mensaje-login.error {
+    color: #6b0b0b; /* Rojo oscuro */
+    background-color: rgba(255, 99, 71, 0.8); /* Rojo tomate translúcido */
+}

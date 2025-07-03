@@ -1,0 +1,34 @@
+<div class="login-container">
+  <h1>Iniciar Sesión</h1>
+  <form (submit)="onSubmit($event)" class="login-form">
+    <label for="email">Correo electrónico:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="correo"
+      placeholder="correo@example.com"
+      required
+    />
+
+    <label for="password">Contraseña:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="contrasena"
+      placeholder="******"
+      required
+    />
+
+    <div class="register-link">
+      <p>Aún no estás registrado? <a routerLink="/register">Registro</a></p>
+      <p>o ir al inicio <a routerLink="/home">Inicio</a></p>
+    </div>
+
+    <button type="submit">Iniciar Sesión</button>
+  </form>
+
+  <!-- ✅ Mensaje de bienvenida o error -->
+  <p *ngIf="mensaje" class="mensaje-login">{{ mensaje }}</p>
+</div>

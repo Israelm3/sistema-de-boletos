@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPRESSIE - Boletos de Transporte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="Expressielogo.png" alt="EXPRESSIE Logo" class="logo">
+        </div>
+        
+        <div class="right-section">
+            <div class="saldo-container">
+                <i class="fas fa-wallet"></i>
+                <span>Saldo: $0.00</span>
+            </div>
+            
+            <div class="dropdown-container">
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <i class="fas fa-bars"></i> Menú
+                    </button>
+                    <div class="dropdown-content">
+                        <a routerLink ="/boleto"><i class="fas fa-ticket-alt"></i> Boletos</a>
+                        <a routerLink="/acerca-de"><i class="fas fa-info-circle"></i> Acerca de</a>
+                        <a routerLink="/recarga"><i class="fas fa-money-bill-wave"></i> Recarga</a>
+                        <a routerLink="/dudas/soporte"><i class="fas fa-question-circle"></i> Soporte</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="auth-buttons">
+  <button class="login" (click)="irALogin()">
+    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+  </button>
+  <button class="register" (click)="irARegistro()">
+    <i class="fas fa-user-plus"></i> Registrarse
+  </button>
+</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Bienvenido a <span>EXPRESSIE</span></h1>
+            <div class="hero-info">
+                <p><i class="fas fa-check-circle"></i> Sistema de venta de boletos 100% en línea</p>
+                <p><i class="fas fa-check-circle"></i> La red de transporte más extensa del país</p>
+                <p><i class="fas fa-check-circle"></i> Más de 500 rutas disponibles</p>
+                <p><i class="fas fa-check-circle"></i> Flota moderna y segura</p>
+                <p><i class="fas fa-check-circle"></i> Atención al cliente 24/7</p>
+            </div>
+            <button class="cta-button">
+                <i class="fas fa-ticket-alt"></i> Comprar Boletos Ahora
+            </button>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Autobús de viaje">
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <section class="dashboard-section">
+        <div class="dashboard">
+            <div class="dashboard-card">
+                <i class="fas fa-route"></i>
+                <div class="dashboard-text">
+                    <h3>+500 Rutas</h3>
+                    <p>Disponibles en todo el país</p>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-users"></i>
+                <div class="dashboard-text">
+                    <h3>+50,000</h3>
+                    <p>Usuarios satisfechos</p>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-bus"></i>
+                <div class="dashboard-text">
+                    <h3>+100 Unidades</h3>
+                    <p>Flota moderna</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Sección de búsqueda -->
+<section class="search-section">
+  <h2 class="section-title">Encuentra tu viaje perfecto</h2>
+  <form class="search-form" (ngSubmit)="enviarFormulario()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="origin"><i class="fas fa-map-marker-alt"></i> Origen</label>
+        <input type="text" id="origin" name="origen" placeholder="Ciudad de origen" [(ngModel)]="boleto.origen">
+      </div>
+      <div class="form-group">
+        <label for="destination"><i class="fas fa-map-marker"></i> Destino</label>
+        <input type="text" id="destination" name="destino" placeholder="Ciudad de destino" [(ngModel)]="boleto.destino">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="date"><i class="fas fa-calendar-alt"></i> Fecha</label>
+        <input type="date" id="date" name="fecha" [(ngModel)]="boleto.fecha">
+      </div>
+      <div class="form-group">
+        <label for="passengers"><i class="fas fa-user-friends"></i> Pasajeros</label>
+        <select id="passengers" name="numeroPasajeros" [(ngModel)]="boleto.numeroPasajeros" (change)="generarPrecioAleatorio()">
+          <option value="1">1 Pasajero</option>
+          <option value="2">2 Pasajeros</option>
+          <option value="3">3 Pasajeros</option>
+          <option value="4">4 Pasajeros</option>
+          <option value="5">5+ Pasajeros</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="seat-type"><i class="fas fa-couch"></i> Tipo de asiento</label>
+        <select id="seat-type" name="categoriaAsiento" [(ngModel)]="boleto.categoriaAsiento">
+          <option value="economy">Económico</option>
+          <option value="business">Ejecutivo</option>
+          <option value="first">Primera Clase</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="payment"><i class="fas fa-credit-card"></i> Método de pago</label>
+        <select id="payment" name="metodoPago" [(ngModel)]="boleto.metodoPago">
+          <option value="credit">Tarjeta de crédito</option>
+          <option value="debit">Tarjeta de débito</option>
+          <option value="cash">Efectivo</option>
+          <option value="transfer">Transferencia</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">
+      <i class="fas fa-search"></i> Crear boleto
+    </button>
+  </form>
+</section>
+
+    <!-- Sección de beneficios -->
+    <section class="benefits">
+        <h2 class="section-title">¿Por qué viajar con EXPRESSIE?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Seguridad garantizada</h3>
+                <p>Todas nuestras unidades cuentan con los más altos estándares de seguridad.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>Wi-Fi gratuito</h3>
+                <p>Disfruta de conexión a internet durante todo tu viaje.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-chair"></i>
+                </div>
+                <h3>Asientos cómodos</h3>
+                <p>Asientos reclinables con amplio espacio para tus piernas.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-snowflake"></i>
+                </div>
+                <h3>Aire acondicionado</h3>
+                <p>Temperatura controlada para tu mayor comodidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de testimonios -->
+    <section class="testimonials">
+        <h2 class="section-title">Lo que dicen nuestros pasajeros</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Compré mis boletos en segundos, todo fue rápido y sencillo. ¡Repetiré sin pensarlo dos veces!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ana Martínez">
+                    <div>
+                        <h4>Ana Martínez</h4>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Excelente servicio y precios accesibles. Muy recomendado para viajes frecuentes."</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Gutiérrez">
+                    <div>
+                        <h4>Carlos Gutiérrez</h4>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Viajar nunca fue tan fácil. El proceso de compra es muy amigable y sin complicaciones."</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura Gómez">
+                    <div>
+                        <h4>Laura Gómez</h4>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>¡No te pierdas nuestras promociones!</h2>
+            <p>Suscríbete a nuestro newsletter y recibe descuentos exclusivos.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribirse</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <img src="Expressielogo.png" alt="EXPRESSIE Logo" class="footer-logo">
+                <p>La mejor opción para tus viajes terrestres. Seguridad, comodidad y precios competitivos.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Enlaces rápidos</h3>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Rutas</a></li>
+                    <li><a href="#">Tarifas</a></li>
+                    <li><a href="#">Promociones</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad, País</p>
+                <p><i class="fas fa-phone"></i> +52 123 456 7890</p>
+                <p><i class="fas fa-envelope"></i> contacto&#64;expressie.com</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 EXPRESSIE. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

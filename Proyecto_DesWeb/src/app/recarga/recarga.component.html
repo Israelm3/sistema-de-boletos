@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de Boletos - EXPRESSIE</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="/Expressie.png" alt="Logo" class="logo">
+        </div>
+        <div class="right-section">
+            <div class="saldo-container">
+                <span>Tu Saldo:</span>
+            </div>
+            <div class="dropdown-container">
+                <div class="dropdown">
+                    <button class="dropbtn">Menú</button>
+                    <div class="dropdown-content">
+                        <a routerLink="/boleto">Boleto</a>
+                        <a routerLink="/acerca-de">Acerca de</a>
+                        <a routerLink="/home">Inicio</a>
+                        <a routerLink="/dudas/soporte">Dudas/Soporte</a>
+                    </div>
+                </div>
+            </div>
+            <div class="auth-buttons">
+                <button class="login" routerLink="/login">Iniciar Sesión</button>
+                <button class="register" routerLink="/register">Registrarse</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Recarga -->
+    <section id="recarga" class="recarga-container">
+        <h2>Recarga de Saldo</h2>
+        <form class="recarga-form">
+            <label for="monto">Monto a Recargar:</label>
+            <select id="monto" name="monto">
+                <option value="50">$50 MXN</option>
+                <option value="100">$100 MXN</option>
+                <option value="200">$200 MXN</option>
+                <option value="500">$500 MXN</option>
+            </select>
+            
+            <!-- Contenedor para datos de tarjeta -->
+            <div id="tarjeta-info" class="tarjeta-container">
+                <label for="num-tarjeta">Número de Tarjeta:</label>
+                <input type="text" id="num-tarjeta" name="num-tarjeta" placeholder="XXXX-XXXX-XXXX-XXXX">
+                
+                <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
+                <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" placeholder="Nombre Completo">
+                
+                <label for="fecha-exp">Fecha de Expiración:</label>
+                <input type="text" id="fecha-exp" name="fecha-exp" placeholder="MM/AA">
+                
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="XXX">
+            </div>
+            
+            <button type="submit" class="recargar-btn">Recargar</button>
+        </form>
+    </section>
+    
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="/Expressie.png" alt="Logo" class="logo">
+                <p>Tu mejor opción en servicios.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📍 Dirección: Ciudad, País</p>
+                <p>📞 Teléfono: +52 123 456 7890</p>
+                <p>📧 Email: contacto&#64;empresa.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <img src="/Facebook.png" alt="Facebook" class="logo-face"> 
+                <img src="/Twitter.png" alt="Twitter" class="logo-twitter"> 
+                <img src="/Instagram.png" alt="Instagram" class="logo-insta"> 
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 EXPRESSIE. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>
